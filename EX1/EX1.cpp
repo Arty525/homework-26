@@ -17,6 +17,7 @@ class Player {
 	Track file;
 	std::fstream list;
 	std::string status = "stop";
+	int pos = 1;
 
 public:
 
@@ -41,21 +42,14 @@ public:
 
 	void play() {
 		if (status == "stop") {
-			std::string line;
-			list.open("list.txt");
-			do {
-				if (line != "|") {
-					list >> line;
-					file.name += line;
-				}
-			} while (line != "|");
-			list >> file.duration >> file.date;
-			std::cout << "now pyaling: " << file.name << file.duration << file.date<< std::endl;
+			std::cout << "Input number of track: ";
+			std::cin >> pos;
+			std::cout << "now pyaling:" << trackList[pos].name << " " << trackList[pos].duration / 60 << ":" << trackList[pos].duration - (trackList[pos].duration / 60 * 60) << std::endl;
 			status = "play";
 		}
 		else if (status == "pause") {
 			status = "play";
-			std::cout << "now playing: " << file.name << std::endl;
+			std::cout << "now pyaling:" << trackList[pos].name << " " << trackList[pos].duration / 60 << ":" << trackList[pos].duration - (trackList[pos].duration / 60 * 60) << std::endl;
 		}
 	}
 
@@ -70,33 +64,41 @@ public:
 		if (status != "stop") {
 			status = "stop";
 			std::cout << "Stop" << std::endl;
+			pos = 1;
 		}
 	}
 	void next() {
-
+		int nextPos;
+		nextPos == trackList.size() - (rand() % trackList.size() - 1);
+		if (nextPos == pos) {
+			if()
+		}
+		status = "pause";
+		play();
 	}
 };
 
 int main() {
 	Player* player = new Player();
 	player->getList();
+	player->showList();
 	std::string command;
-	std::cin >> command;
-	if (command == "play") {
-		player->play();
-	}
-	else if (command == "pause") {
-		player->pause();
-	}
-	else if (command == "stop") {
-		player->stop();
-	}
-	else if (command == "next") {
-
-	}
-	else if (command == "list") {
-		player->showList();
-	}
+	do {
+		std::cout << "Enter command: ";
+		std::cin >> command;
+		if (command == "play") {
+			player->play();
+		}
+		else if (command == "pause") {
+			player->pause();
+		}
+		else if (command == "stop") {
+			player->stop();
+		}
+		else if (command == "next") {
+			player->next();
+		}
+	} while (command != "exit");
 	delete player;
 	player = nullptr;
 	return 0;
