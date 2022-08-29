@@ -1,12 +1,25 @@
-﻿// EX2.cpp: определяет точку входа для приложения.
-//
+﻿#include <iostream>
+#include <fstream>
+#include <string>
 
-#include "EX2.h"
+class Contact {
+	std::string number;
+	std::string name;
+};
 
-using namespace std;
+class Phone {
+	std::fstream phoneBook;
+	std::string command;
+	std::string input;
 
-int main()
-{
-	cout << "Hello CMake." << endl;
-	return 0;
-}
+	void add() {
+		std::cout << "Enter phone number: ";
+		do {
+			std::cin >> input;
+			if (input[0] != '+' || input[1] != '7' || input.length() != 10) {
+				std::cout << "Invalid number format." << std::endl;
+			}
+		} while (input[0] != '+' || input[1] != '7' || input.length() != 10);
+
+	}
+};
