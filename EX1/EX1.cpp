@@ -68,11 +68,11 @@ public:
 		}
 	}
 	void next() {
-		int nextPos;
-		nextPos == trackList.size() - (rand() % trackList.size() - 1);
-		if (nextPos == pos) {
-			if()
+		int nextPos = pos;
+		while (nextPos == pos) {
+			nextPos = (trackList.size() - 1) - (rand() % trackList.size() - 1);
 		}
+		pos = nextPos;
 		status = "pause";
 		play();
 	}
